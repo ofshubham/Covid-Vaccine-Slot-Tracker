@@ -1,0 +1,20 @@
+{
+  "manifest_version": 2,
+  "name": "Indian Covid Vaccine Slot Tracker",
+  "version": "0.0.1",
+  "description": "An Application to track covid vaccine slot on Cowin.",
+  "background": {
+    "persistent": true,
+    "scripts": ["js/jquery.min.js", "js/background.js"]
+  },
+  "icons": {
+    "128": "./images/icon128.png",
+    "48": "./images/icon48.png",
+    "16": "./images/icon16.png"
+  },
+  "permissions": ["storage"],
+  "browser_action": {
+    "default_icon": "./images/icon16.png",
+    "default_popup": "popup.html"
+  }
+}

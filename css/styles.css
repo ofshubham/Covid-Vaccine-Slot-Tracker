@@ -1,0 +1,38 @@
+.container-fluid {
+  min-width:700px;
+}
+caption{
+  caption-side: top;
+  font-weight: 100;
+
+}
+
+
+.border-class
+{
+  border:thin black solid;
+  margin:20px;
+  padding:20px;
+}
+
+  img {
+    
+    width: 60px;
+    height: 40px;
+  } 
+
+  .navbar p { 
+      color: rgb(216, 135, 42)
+  }
+
+  .main {
+    padding: 16px;
+    margin-top: 60px;
+    border: 1px solid grey;
+    /* height: 1500px; Used in this example to enable scrolling */
+  }
+
+  .form-group {
+    padding: 5px;
+    margin: 0;
+  }
