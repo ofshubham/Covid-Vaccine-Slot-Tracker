@@ -1,10 +1,3 @@
-DISTRICT_ENDPOINT =
-  "https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/findByDistrict";
-// curl -X GET "https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/findByDistrict?district_id=512&date=31-03-2021" -H "accept: application/json" -H "Accept-Language: hi_IN"'
-
-PINCODE_ENDPOINT =
-  "https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/findByPin";
-// curl -X GET "https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/findByPin?pincode=110001&date=31-03-2021" -H "accept: application/json" -H "Accept-Language: hi_IN"
 
 function clearData() {
   // chrome.storage.local.set({ data: {} });
@@ -77,49 +70,6 @@ $(function () {
   });
 });
 
-function startFetching(data) {
-  var date = new Date();
-  var day = date.getDate();
-  var month = date.getMonth() + 1;
-  var year = date.getFullYear();
-  date =
-    (day < 10 ? "0" + day : day) +
-    "-" +
-    (month < 10 ? "0" + month : month) +
-    "-" +
-    year;
-  data.date = date;
-  fetchAvailableCenters(data);
-  return setInterval(fetchAvailableCenters, data.interval, data);
-}
-
-function fetchAvailableCenters(data) {
-  var searchType = data.searchType;
-  var pincode = data.pincode;
-  var district_id = data.district_id;
-  var date = data.date;
-  var url = "";
-  //pincode
-  if (searchType === "pincode") {
-    url = PINCODE_ENDPOINT + "?pincode=" + pincode + "&date=" + date;
-  }
-  //district
-  if (searchType === "district") {
-    url = DISTRICT_ENDPOINT + "?district_id=" + district_id + "&date=" + date;
-  }
-
-  if (url) {
-    $.ajax({
-      url: url,
-      success: function (objects) {
-        renderData(objects, date);
-      },
-      error: function (jqXHR, exception) {
-        console.log(exception, jqXHR);
-      },
-    });
-  }
-}
 
 function isPincodeValid(pincode) {
   var regexp = /^[1-9][0-9]{5}/;
