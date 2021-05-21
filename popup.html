@@ -12,51 +12,94 @@
     <script src="js/popup.js"></script>
     <title>Covid Vaccine Tracker</title>
 </head>
+<style>
+.Main-box{    background: #528bce;
+    padding: 10px 0;
+    height: auto;width:450px;
+    font-size: 11px!important;}
+.MainBg {
+    background: #fff;
+    height: auto;
+    padding: 0;
+    box-shadow: 1px 0px 5px #002564;
+    position: relative;
+    overflow: hidden;
+}
+.MainBg img.bgpos {
+    max-width: 100%;
+    width: 100%;
+    height: auto;
+    position: relative;
+    left: 0;
+    top: 0;
+    object-fit: cover;
+    
+}
+.form-check .form-check-input {
+    float: none;
+    margin-left: 0;
+}
+.form-check.form-check-inline {
+    padding-left: 0;
+}
+.FormBox {
+       background: #020c16;
+    padding:0 20px!important;
+    height: auto;
+    color: #fff;
+}
+</style>
 
 <body>
-    <nav class="navbar navbar-dark bg-dark">
+    <!-- <nav class="navbar navbar-dark bg-dark">
 
         <p class="mx-auto">
             <img class="navbar-brand" src="images/icon128.png" alt="">Covid Vaccine Slot Checker
         </p>
-    </nav>
-    <div class="container-fluid">
+    </nav> -->
+	<div class="Main-box">
+    <div class="container">
+	
+	<div class="MainBg" >
+	
         <div class="row">
-            <div class="col-12">
-                <form id="appForm" class="border-class">
+		<div class="col-lg-8 col-12 p-0"><img src="images/bg-2.jpg" class="bgpos"/></div> 
+            <div class="col-lg-4 col-12 p-0 FormBox">
+                <form id="appForm" >
                     <div class="row">
-                        <div class="col-6">
-                            <label for="searchby">Check By: </label>
-                        </div>
-                        <div class="col-6">
-                            <div class="form-group form-check">
+                       
+                        <div class="col-12">
+						
+						<div class="form-group">
+						<label for="searchby">Check By: </label>
+                            <div class="form-check form-check-inline">
                                 <input class="form-check-input" type="radio" name="searchType" value="pincode" checked>
-                                <label class="form-check-label" for="pincode">Pincode</label><br>
+                                <label class="form-check-label" for="pincode">Pincode</label>
                                 <input class="form-check-input" type="radio" name="searchType" value="district">
                                 <label class="form-check-label" for="district">District</label><br>
                             </div>
+							</div>
                         </div>
                     </div>
 
                     <div class="row">
-                        <div class="col-6">
-                            <label for="pincode">Pincode: </label>
-                        </div>
-                        <div class="col-6">
+                       
+                        <div class="col-12">
+						
                             <div class="form-group">
-                                <input class="form-control" type="text" name="pincode" id="pincode">
+							<label for="pincode">Pincode: </label>
+                                <input class="form-control form-control-sm" type="text" name="pincode" id="pincode">
                                 <small class="text-danger" id="pincodeError"></small>
                             </div>
                         </div>
                     </div>
 
                     <div class="row">
-                        <div class="col-6">
-                            <label for="district">District: </label>
-                        </div>
-                        <div class="col-6">
+                       
+                        <div class="col-12">
                             <div class="form-group">
-                                <select name="district" class="form-control" id="district" disabled>
+							 <label for="district">District: </label>
+                                <select name="district" class="form-control form-control-sm" id="district" disabled>
                                     <option value='582'>Adilabad</option>,
                                     <option value='320'>Agar</option>,
                                     <option value='796'>Agatti Island</option>,
@@ -825,12 +868,11 @@
 
 
                     <div class="row">
-                        <div class="col-6">
-                            <label for="age">Age Group: </label>
-                        </div>
-                        <div class="col-6">
+                       
+                        <div class="col-12">
                             <div class="form-group">
-                                <select name="age" class="form-control" id="age">
+							 <label for="age">Age Group: </label>
+                                <select name="age" class="form-control form-control-sm" id="age">
                                     <option value="0">All</option>
                                     <option value="18">18+</option>
                                     <option value="45">45+</option>
@@ -845,12 +887,11 @@
 
 
                     <div class="row">
-                        <div class="col-6">
-                            <label for="Interval">Check Interval: </label>
-                        </div>
-                        <div class="col-6">
+                     
+                        <div class="col-12">
                             <div class="form-group">
-                                <select name="interval" class="form-control" id="interval">
+							<label for="Interval">Check Interval: </label>
+                                <select name="interval" class="form-control form-control-sm" id="interval">
                                     <option value="30000">30 Seconds</option>
                                     <option value="60000">1 Minutes</option>
                                     <option value="600000">5 Minutes</option>
@@ -866,11 +907,12 @@
 
 
                     <div class="row">
-                        <div class="col-6">
-                            <input type="submit" class="btn btn-success" id="submitBtn" value="Start Checking">
+                        
+                        <div class="col-12">
+						<div class="form-group">
+						 <input type="submit" class="btn btn-success btn-sm" id="submitBtn" value="Start Checking">
+                            <button id="reset" class="btn btn-danger btn-sm" type="button" disabled>Stop Checking</button>
                         </div>
-                        <div class="col-6">
-                            <button id="reset" class="btn btn-danger" type="button" disabled>Stop Checking</button>
                         </div>
                     </div>
 
@@ -894,7 +936,11 @@
                 </div>
             </div>
         </div>
+		</div>
+		
     </div>
+
+</div>
 </body>
 
 </html>
