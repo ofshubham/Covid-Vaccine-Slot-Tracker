@@ -13,7 +13,7 @@
     <title>Covid Vaccine Tracker</title>
 </head>
 <style>
-.Main-box{    background: #528bce;
+.Main-box{    background: #fff;
     padding: 10px 0;
     height: auto;width:450px;
     font-size: 11px!important;}
@@ -43,10 +43,27 @@
     padding-left: 0;
 }
 .FormBox {
-       background: #020c16;
-    padding:0 20px!important;
+ background: #006ad4;
+    padding: 0 20px!important;
     height: auto;
     color: #fff;
+}
+.Heading {
+    position: absolute;
+    font-size: 28px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    color: #fff;
+    top: 12px;
+    font-weight: 600;
+}
+div#availableCenters {
+    overflow-y: auto;
+    background: #fff;
+}
+.btn {
+    border: 1px solid #fff!important;
 }
 </style>
 
@@ -63,7 +80,9 @@
 	<div class="MainBg" >
 	
         <div class="row">
-		<div class="col-lg-8 col-12 p-0"><img src="images/bg-2.jpg" class="bgpos"/></div> 
+		<div class="col-lg-8 col-12 p-0"><img src="images/bg-2.jpg" class="bgpos"/>
+		<div class="Heading">Covid Vaccine Slot Checker</div>
+		</div> 
             <div class="col-lg-4 col-12 p-0 FormBox">
                 <form id="appForm" >
                     <div class="row">
@@ -910,8 +929,8 @@
                         
                         <div class="col-12">
 						<div class="form-group">
-						 <input type="submit" class="btn btn-success btn-sm" id="submitBtn" value="Start Checking">
-                            <button id="reset" class="btn btn-danger btn-sm" type="button" disabled>Stop Checking</button>
+						 <input type="submit" class="btn btn-primary btn-sm" id="submitBtn" value="Start Checking">
+                            <button id="reset" class="btn btn-success btn-sm" type="button" disabled>Stop Checking</button>
                         </div>
                         </div>
                     </div>
