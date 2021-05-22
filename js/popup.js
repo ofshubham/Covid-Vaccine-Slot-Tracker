@@ -14,6 +14,10 @@ function resetForm() {
   $("#age").val('0');
 }
 
+$(document).on('click', 'body *', ()=>{
+  chrome.runtime.sendMessage('clearBadge');
+})
+
 $(function () {
   //form submit
   $("#appForm").on("submit", (event) => {
@@ -51,7 +55,6 @@ $(function () {
   });
 
   $("#reset").on("click", () => {
-    console.log("reset");
     clearData();
     resetForm();
     disableEnable("reset", "submitBtn");
@@ -84,8 +87,7 @@ function disableEnable(toBeDisabled, toBeEnabled) {
   $("#" + toBeEnabled).attr("disabled", false);
 }
 
-function createCenterTable(center, data) {
-  availaibilityInCenter = false;
+function createCenterTable(center) {
   var html = `<table class="table border-class">
         <caption><strong>${center.name} - ${center.pincode} (<a href="https://selfregistration.cowin.gov.in/">Book</a>)</strong></caption>
         <thead>
@@ -99,11 +101,6 @@ function createCenterTable(center, data) {
         </thead>
         <tbody>`;
   center.sessions.forEach((s) => {
-    if (
-      s.available_capacity > 0 &&
-      (+s.min_age_limit == +data.age || +data.age === 0)
-    ) {
-      availaibilityInCenter = true;
       html += `<tr>
                 <td>${s.vaccine}</td>
                 <td>${s.date}</td>
@@ -111,34 +108,25 @@ function createCenterTable(center, data) {
                 <td>${s.available_capacity_dose2}</td>
                 <td>${s.min_age_limit}</td>
                </tr>`;
-    }
   });
-  if (availaibilityInCenter) {
     html += `   </tbody>
             </table>`;
     return html;
-  }
-  return null;
 }
 
-function renderDataUtil(centers, data) {
+function renderDataUtil(centers) {
   html = "";
-  console.log(data);
   centers.forEach((c) => {
-    result = createCenterTable(c, data);
+    result = createCenterTable(c);
     if (result) {
       html += result;
     }
   });
-  if (!html) {
-    html = `<p>No Slot Available</p>`;
-  }
   $("#availableCenters").html(html);
 }
 
 function renderData() {
   chrome.storage.local.get("data", (res1) => {
-    console.log(res1);
     if (res1.data) {
       disableEnable("submitBtn", "reset");
       if (res1.data.searchType === "pincode") {
@@ -160,14 +148,17 @@ function renderData() {
       $("#district").val(res1.data.district_id);
       $("#age").val(res1.data.age);
     }else{
-      console.log('in reset form');
       resetForm();
     }
     chrome.storage.local.get("availableCenters", (res) => {
       if (res.availableCenters && res.availableCenters.length > 0) {
-        renderDataUtil(res.availableCenters, res1.data);
+        renderDataUtil(res.availableCenters);
       }else{
-        $("#availableCenters").html('');
+        if(typeof res.availableCenters === 'undefined'){
+          $("#availableCenters").html(``);  
+        }else{
+          $("#availableCenters").html(`<p>No Slot Available</p>`);
+        }
       }
     });
   });
@@ -181,3 +172,4 @@ chrome.runtime.onMessage.addListener((response, sender, sendResponse) => {
 });
 
 renderData();
+chrome.runtime.sendMessage('clearBadge');

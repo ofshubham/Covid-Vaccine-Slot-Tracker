@@ -7,6 +7,35 @@ PINCODE_ENDPOINT =
   "https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/calendarByPin";
 //   curl -X GET "https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/calendarByPin?pincode=110001&date=31-03-2021" -H "accept: application/json" -H "Accept-Language: hi_IN"
 
+
+function setBadge(text){
+  chrome.browserAction.setBadgeText({text: text.toString()});
+}
+
+function clearBadge(){
+  chrome.browserAction.setBadgeText({text: ''});
+}
+
+function filterCenters(centers, data){
+  result = []
+  centers.forEach(center => {
+    obj = {};
+    sessionArray = [];
+    center.sessions.forEach(s => {
+      if(s.available_capacity > 0 && (+s.min_age_limit == +data.age || +data.age === 0)){
+        sessionArray.push(s);
+      }
+    })
+    if(sessionArray.length > 0){
+      obj.name = center.name;
+      obj.pincode = center.pincode;
+      obj.sessions = sessionArray;
+      result.push(obj);
+    }
+  });
+  return result;
+}
+
 function startFetching(data) {
   var date = new Date();
   var day = date.getDate();
@@ -44,8 +73,12 @@ function fetchAvailableCenters(data) {
     $.ajax({
       url: url,
       success: function (objects) {
-        chrome.storage.local.set({ availableCenters: objects.centers }, () => {
-          sound.play();
+        centersData = filterCenters(objects.centers, data);
+        chrome.storage.local.set({ availableCenters: centersData}, () => {
+          if(centersData && centersData.length > 0){
+            sound.play();
+          }
+          setBadge(centersData.length);
           chrome.runtime.sendMessage("renderData");
         });
       },
@@ -55,6 +88,7 @@ function fetchAvailableCenters(data) {
     });
   }
 }
+
 
 function initiateFetching() {
   chrome.storage.local.get("data", function (res) {
@@ -73,6 +107,9 @@ chrome.runtime.onMessage.addListener((response, sender, sendResponse) => {
       break;
     case "reset":
       resetInterval();
+      break;
+    case "clearBadge":
+      clearBadge();
       break;
   }
   return true;
