@@ -7,11 +7,15 @@ function clearData() {
 }
 
 function resetForm() {
-  $(`input[name="searchType"][value='pincode']`).attr("checked", "checked");
+  $(`input[name="searchType"][value="district"]`).prop("checked", true);
+  $(`input[name="doseNumber"][value="0"]`).prop("checked", true);
   $('#pincode').val('');
   $("#interval").val('30000');
   $("#district").val('582');
   $("#age").val('0');
+  $("#vaccine").val('0');
+  $('#minSlots').val('1');
+
 }
 
 $(document).on('click', 'body *', ()=>{
@@ -37,12 +41,18 @@ $(function () {
       var age = $("#age").val();
       var interval = $("#interval").val();
       var district = $("#district").val();
+      var vaccine = $("#vaccine").val();
+      var dose = $("input[name=doseNumber]:checked").val();
+      var minSlots = $('#minSlots').val();
       data = {
         searchType: searchTypeVal,
         interval: interval,
         pincode: pincode,
         district_id: district,
         age: age,
+        vaccine: vaccine,
+        dose: dose,
+        minSlots: minSlots
       };
 
       chrome.storage.local.set({ data });
@@ -130,19 +140,22 @@ function renderData() {
     if (res1.data) {
       disableEnable("submitBtn", "reset");
       if (res1.data.searchType === "pincode") {
-        $(`input[name="searchType"][value='pincode']`).attr(
-          "checked",
-          "checked"
-        );
+        $(`input[name="searchType"][value="pincode"]`).prop("checked", true);
         disableEnable("district", "pincode");
       } else {
-        $(`input[name="searchType"][value='district']`).attr(
-          "checked",
-          "checked"
-        );
+        $(`input[name="searchType"][value="district"]`).prop("checked", true);
         disableEnable("pincode", "district");
       }
 
+      if (res1.data.dose === '1') {
+        $(`input[name='doseNumber'][value="1"]`).prop("checked", true);
+      } else if(res1.data.dose == '2'){
+        $(`input[name='doseNumber'][value="2"]`).prop("checked", true);
+      }else{
+        $(`input[name='doseNumber'][value="0"]`).prop("checked", true);
+      }
+      $("#vaccine").val(res1.data.vaccine);
+      $("#minSlots").val(res1.data.minSlots);
       $("#interval").val(res1.data.interval);
       $("#pincode").val(res1.data.pincode);
       $("#district").val(res1.data.district_id);
