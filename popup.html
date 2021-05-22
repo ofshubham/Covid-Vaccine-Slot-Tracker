@@ -30,10 +30,10 @@
                         </div>
                         <div class="col-6">
                             <div class="form-group form-check">
-                                <input class="form-check-input" type="radio" name="searchType" value="pincode" checked>
-                                <label class="form-check-label" for="pincode">Pincode</label><br>
-                                <input class="form-check-input" type="radio" name="searchType" value="district">
+                                <input class="form-check-input" type="radio" name="searchType" value="district" checked>
                                 <label class="form-check-label" for="district">District</label><br>
+                                <input class="form-check-input" type="radio" name="searchType" value="pincode">
+                                <label class="form-check-label" for="pincode">Pincode</label><br>
                             </div>
                         </div>
                     </div>
@@ -44,7 +44,7 @@
                         </div>
                         <div class="col-6">
                             <div class="form-group">
-                                <input class="form-control" type="text" name="pincode" id="pincode">
+                                <input class="form-control" type="text" name="pincode" id="pincode" disabled>
                                 <small class="text-danger" id="pincodeError"></small>
                             </div>
                         </div>
@@ -56,7 +56,7 @@
                         </div>
                         <div class="col-6">
                             <div class="form-group">
-                                <select name="district" class="form-control" id="district" disabled>
+                                <select name="district" class="form-control" id="district">
                                     <option value='582'>Adilabad</option>,
                                     <option value='320'>Agar</option>,
                                     <option value='796'>Agatti Island</option>,
@@ -839,7 +839,65 @@
                         </div>
                     </div>
 
+                    <div class="row">
+                        <div class="col-6">
+                            <label for="vaccine">Vaccine: </label>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <select name="vaccine" class="form-control" id="vaccine">
+                                    <option value="0">Any</option>
+                                    <option value="covishield">Covishield</option>
+                                    <option value="covaxin">Covaxin</option>
+                                    <option value="sputnik">Sputnik</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
 
+                    <div class="row">
+                        <div class="col-6">
+                            <label for="minSlots">Minimum Slots: </label>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <select name="minSlots" class="form-control" id="minSlots">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">6</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="row">
+                        <div class="col-6">
+                            <label for="dose">Dose : </label>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group form-check">
+                                <input class="form-check-input" type="radio" name="doseNumber" value="0" checked>
+                                <label class="form-check-label" for="any">Any</label><br>
+                                <input class="form-check-input" type="radio" name="doseNumber" value="1">
+                                <label class="form-check-label" for="1">1</label><br>
+                                <input class="form-check-input" type="radio" name="doseNumber" value="2">
+                                <label class="form-check-label" for="2">2</label><br>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+
+                    
 
 
 

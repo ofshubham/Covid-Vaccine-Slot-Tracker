@@ -22,7 +22,7 @@ function filterCenters(centers, data){
     obj = {};
     sessionArray = [];
     center.sessions.forEach(s => {
-      if(s.available_capacity > 0 && (+s.min_age_limit == +data.age || +data.age === 0)){
+      if((s.available_capacity > +data.minSlots - 1) && (+s.min_age_limit == +data.age || +data.age === 0) && (+data.vaccine === 0 || data.vaccine.toUpperCase() === s.vaccine.toUpperCase()) && (+data.dose === 0 || (+data.dose === 1 && s.available_capacity_dose1 > 0) || (+data.dose === 2 && s.available_capacity_dose2 > 0))){
         sessionArray.push(s);
       }
     })
