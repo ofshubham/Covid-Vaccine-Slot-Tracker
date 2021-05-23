@@ -137,7 +137,7 @@ function disableEnable(toBeDisabled, toBeEnabled) {
 function createCenterTable(center, data) {
   availaibilityInCenter = false;
   var html = `<table class="table border-class">
-        <caption><strong>${center.name} - ${center.pincode} (<a href="https://selfregistration.cowin.gov.in/">Book</a>)</strong></caption>
+        <caption style="color:black;"><strong>${center.name} - ${center.pincode} (<a href="https://selfregistration.cowin.gov.in/">Book</a>)</strong></caption>
         <thead>
             <tr>
                 <th scope="col">Vaccine</th>
