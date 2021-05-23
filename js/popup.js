@@ -9,6 +9,7 @@ function clearData() {
 function resetForm() {
   $(`input[name="searchType"][value="district"]`).prop("checked", true);
   $(`input[name="doseNumber"][value="0"]`).prop("checked", true);
+  disableEnable('pincode', 'district');
   $('#pincode').val('');
   $("#interval").val('30000');
   $("#district").val('582');
@@ -98,8 +99,8 @@ function disableEnable(toBeDisabled, toBeEnabled) {
 }
 
 function createCenterTable(center) {
-  var html = `<table class="table border-class">
-        <caption><strong>${center.name} - ${center.pincode} (<a href="https://selfregistration.cowin.gov.in/">Book</a>)</strong></caption>
+  var html = `<table class="table border-class" style="color:white;">
+        <caption style="color:white;"><strong>${center.name} - ${center.pincode} (<a href="https://selfregistration.cowin.gov.in/">Book</a>)</strong></caption>
         <thead>
             <tr>
                 <th scope="col">Vaccine</th>

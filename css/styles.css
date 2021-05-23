@@ -8,12 +8,14 @@ caption{
 }
 
 
-.border-class
+
+
+/* .border-class
 {
   border:thin black solid;
   margin:20px;
   padding:20px;
-}
+} */
 
   img {
     
@@ -36,3 +38,7 @@ caption{
     padding: 5px;
     margin: 0;
   }
+
+
+
+  
