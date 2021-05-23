@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Indian Covid Vaccine Slot Tracker",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "An Application to track covid vaccine slot on Cowin.",
   "background": {
     "persistent": true,
